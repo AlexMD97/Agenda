@@ -17,5 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
         agendaProvider = new AgendaProvider(this);
         contactos = agendaProvider.cargarContactos();
+
+        // tarea: crear el listview principal y mostrar el contenido del arraylist de contactos.
+        // tarea2: crear el activity de edición de contactos.
     }
 }
