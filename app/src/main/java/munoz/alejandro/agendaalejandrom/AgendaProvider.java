@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.provider.ContactsContract;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Esta clase sirve para extraer los datos de la agenda propia del telefono
@@ -23,8 +22,8 @@ public class AgendaProvider {
      * Método para obtener los contactos de la agenda del télefono.
      * @return ArrayList de objetos contacto.
      */
-    public List<Contacto> cargarContactos(){
-        List<Contacto> contactos = new ArrayList<>();
+    public ArrayList<Contacto> cargarContactos(){
+        ArrayList<Contacto> contactos = new ArrayList<>();
         ContentResolver contentResolver = context.getContentResolver();
 
         Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
