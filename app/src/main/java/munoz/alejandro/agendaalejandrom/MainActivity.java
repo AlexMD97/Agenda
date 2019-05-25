@@ -6,12 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     public static final int REQUEST_CODE = 1;
+    public static final String CONTACTO = "contacto";
     private ArrayList<Contacto> contactos;
     private AgendaProvider agendaProvider;
     private ContactosAdapter contactosAdapter;
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         contactosAdapter = new ContactosAdapter(contactos, this);
         lvContactos = findViewById(R.id.lvContactos);
         lvContactos.setAdapter(contactosAdapter);
-
+        lvContactos.setOnItemClickListener(this);
     }
 
     @Override
@@ -54,5 +56,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Contacto pulsado = contactos.get(position);
+        Intent i = new Intent(this, EditarContactoActivity.class);
+        i.putExtra(CONTACTO, pulsado);
+        startActivityForResult(i, REQUEST_CODE);
     }
 }
