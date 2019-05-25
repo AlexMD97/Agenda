@@ -1,19 +1,21 @@
 package munoz.alejandro.agendaalejandrom;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE = 1;
-    private List<Contacto> contactos;
+    private ArrayList<Contacto> contactos;
     private AgendaProvider agendaProvider;
+    private ContactosAdapter contactosAdapter;
+    private ListView lvContactos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +24,10 @@ public class MainActivity extends AppCompatActivity {
 
         agendaProvider = new AgendaProvider(this);
         contactos = agendaProvider.cargarContactos();
+        contactosAdapter = new ContactosAdapter(contactos, this);
+        lvContactos = findViewById(R.id.lvContactos);
+        lvContactos.setAdapter(contactosAdapter);
 
-        // tarea: crear el listview principal y mostrar el contenido del arraylist de contactos.
-        // tarea2: crear el activity de edición de contactos.
     }
 
     @Override

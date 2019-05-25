@@ -1,7 +1,6 @@
 package munoz.alejandro.agendaalejandrom;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +47,12 @@ public class ContactosAdapter extends BaseAdapter {
             TextView aviso=v.findViewById(R.id.txtMensaje);
 
             nombre.setText(misContactos.get(i).getNombre());
-            telefono.setText(misContactos.get(i).getTelefono()  );
+            telefono.setText(misContactos.get(i).getTelefono());
+            if(misContactos.get(i).isEnviarSMS()) {
+                aviso.setText("Aviso: Enviar SMS");
+            } else {
+                aviso.setText("Aviso: Solo notificación");
+            }
         }
         return v;
     }
