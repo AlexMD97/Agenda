@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public static final String CONTACTO = "contacto";
     private ArrayList<Contacto> contactos;
     private AgendaProvider agendaProvider;
+    private BBDDHandler bbdd;
     private ContactosAdapter contactosAdapter;
     private ListView lvContactos;
 
@@ -24,8 +25,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        agendaProvider = new AgendaProvider(this);
-        contactos = agendaProvider.cargarContactos();
+        bbdd = new BBDDHandler(this);
+        if(bbdd.existsDatabase()) {
+            contactos = bbdd.getContactos();
+        } else {
+            agendaProvider = new AgendaProvider(this);
+            contactos = agendaProvider.cargarContactos();
+            // los guardamos en la bbdd
+            bbdd.createDatabase();
+            bbdd.createContactos(contactos);
+        }
+
         contactosAdapter = new ContactosAdapter(contactos, this);
         lvContactos = findViewById(R.id.lvContactos);
         lvContactos.setAdapter(contactosAdapter);
