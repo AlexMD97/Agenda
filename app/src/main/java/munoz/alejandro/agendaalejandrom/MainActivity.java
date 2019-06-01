@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         } else {
             agendaProvider = new AgendaProvider(this);
             contactos = agendaProvider.cargarContactos();
-            // los guardamos en la bbdd
+            // los guardamos en la bbdd-
             bbdd.createDatabase();
             bbdd.createContactos(contactos);
         }

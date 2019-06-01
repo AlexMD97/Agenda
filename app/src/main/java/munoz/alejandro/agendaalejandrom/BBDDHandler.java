@@ -78,7 +78,7 @@ public class BBDDHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // No lo usamos porque queremos comprobar primero su existencia.
+        // No lo usamos porque queremos comprobar primero si existe o no
     }
 
     @Override
